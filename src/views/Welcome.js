@@ -13,7 +13,9 @@ export default function Welcome({ setView }) {
       <View style={styles.titleContainer}>
         <View style={styles.titleBackground}>
           <Text style={styles.title}>Mama Jamila</Text>
-          <Text style={styles.subline}>A cute little subline</Text>
+          <Text style={styles.subline}>
+            Homemade quality snacks and drinks, personalized just for you.
+          </Text>
         </View>
       </View>
       <TouchableOpacity
@@ -41,7 +43,8 @@ const styles = StyleSheet.create({
   titleBackground: {
     backgroundColor: "rgba(242, 240, 221, 0.8)",
     paddingVertical: 8,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
+    maxWidth: width * 0.8
   },
   title: {
     fontSize: 32,

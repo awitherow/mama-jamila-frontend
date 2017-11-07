@@ -3,44 +3,77 @@ import {
   StyleSheet,
   Image,
   View,
+  Text,
   TouchableOpacity,
   Dimensions
 } from "react-native";
 
-export default function Dashboard({ setView }) {
-  return (
-    <View style={styles.container}>
-      <View style={styles.navBar}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => setView("profile")}
-        >
-          <Image
-            style={styles.icon}
-            source={require("../assets/icons/profile.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => setView("menu")}
-        >
-          <Image
-            style={styles.icon}
-            source={require("../assets/icons/menu.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => setView("settings")}
-        >
-          <Image
-            style={styles.icon}
-            source={require("../assets/icons/settings.png")}
-          />
-        </TouchableOpacity>
+export default class Dashboard extends React.Component {
+  state = {
+    dashboardView: "menu"
+  };
+
+  setDashboardView = view => this.setState({ dashboardView: view });
+
+  renderDashboardView = () => {
+    switch (this.state.dashboardView) {
+      case "profile":
+        return (
+          <View style={styles.dashboardView}>
+            <Text>Profile</Text>
+          </View>
+        );
+      case "menu":
+        return (
+          <View style={styles.dashboardView}>
+            <Text>Menu</Text>
+          </View>
+        );
+      case "about":
+        return (
+          <View style={styles.dashboardView}>
+            <Text>about</Text>
+          </View>
+        );
+    }
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderDashboardView()}
+        <View style={styles.navBar}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => this.setDashboardView("profile")}
+          >
+            <Image
+              style={styles.icon}
+              source={require("../assets/icons/profile.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => this.setDashboardView("menu")}
+          >
+            <Image
+              style={styles.icon}
+              source={require("../assets/icons/menu.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => this.setDashboardView("about")}
+          >
+            <Image
+              style={styles.icon}
+              source={require("../assets/icons/settings.png")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const { height, width } = Dimensions.get("window");
@@ -50,6 +83,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center"
+  },
+  dashboardView: {
+    flex: 1,
+    padding: 48,
+    width,
+    backgroundColor: "rgba(242, 240, 221, 0.66)"
   },
   navBar: {
     flexDirection: "row",
