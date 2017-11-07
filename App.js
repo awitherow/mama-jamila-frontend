@@ -4,15 +4,19 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Dimensions
 } from "react-native";
 
 import { Font } from "expo";
 
+import Welcome from "./src/views/Welcome";
+import Dashboard from "./src/views/Dashboard";
+
 export default class App extends React.Component {
   state = {
-    loading: true
+    loading: true,
+    view: "welcome"
   };
 
   async componentDidMount() {
@@ -23,9 +27,26 @@ export default class App extends React.Component {
     });
 
     this.setState({ loading: false });
-
-    // this.refs.body.fadeIn();
   }
+
+  renderContent = () => {
+    const sharedProps = {
+      setView: this.setView
+    };
+
+    const WELCOME_SCREEN = <Welcome {...sharedProps} />;
+
+    switch (this.state.view) {
+      case "welcome":
+        return WELCOME_SCREEN;
+      case "dashboard":
+        return <Dashboard {...sharedProps} />;
+      default:
+        return WELCOME_SCREEN;
+    }
+  };
+
+  setView = view => this.setState({ view });
 
   render() {
     return (
@@ -33,19 +54,7 @@ export default class App extends React.Component {
         style={styles.backgroundImage}
         source={require("./src/assets/intro-bg.jpg")}
       >
-        {this.state.loading ? null : (
-          <View style={styles.container}>
-            <View style={styles.titleContainer}>
-              <View style={styles.titleBackground}>
-                <Text style={styles.title}>Mama Jamila</Text>
-                <Text style={styles.subline}>A cute little subline</Text>
-              </View>
-            </View>
-            <TouchableHighlight style={styles.goButton}>
-              <Text>Let's go!</Text>
-            </TouchableHighlight>
-          </View>
-        )}
+        {this.state.loading ? null : this.renderContent()}
       </Image>
     );
   }
@@ -58,35 +67,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "stretch",
     width: null
-  },
-  container: {
-    flex: 1
-  },
-  titleContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    marginBottom: 48
-  },
-  titleBackground: {
-    backgroundColor: "rgba(242, 240, 221, 0.8)",
-    paddingVertical: 8,
-    paddingHorizontal: 16
-  },
-  title: {
-    fontSize: 32,
-    textAlign: "right",
-    fontFamily: "medium"
-  },
-  subline: {
-    fontSize: 16,
-    textAlign: "right",
-    fontFamily: "light"
-  },
-  goButton: {
-    width,
-    padding: 24,
-    justifyContent: "center",
-    alignItems: "center"
   }
 });
