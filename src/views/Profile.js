@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Dimensions,
   StyleSheet,
-  Image
+  Image,
+  AsyncStorage
 } from "react-native";
 
 import { ImagePicker } from "expo";
@@ -15,14 +16,33 @@ export default class Profile extends React.Component {
     image: null
   };
 
+  async componentDidMount() {
+    try {
+      const image = await AsyncStorage.getItem("@MJ:pic");
+      if (image !== null) {
+        this.setState({ image });
+      }
+    } catch (error) {
+      console.warn("[WARN]: could not retrieve profile pic from async storage");
+    }
+  }
+
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [4, 3]
+      aspect: [4, 3],
+      base64: true
     });
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ image: result.base64 });
+
+      try {
+        await AsyncStorage.setItem("@MJ:pic", result.base64);
+        console.log("[INFO]: saved profile pic to async storage");
+      } catch (error) {
+        console.warn("[WARN]: could not save profile pic to async storage");
+      }
     }
   };
 
@@ -33,7 +53,10 @@ export default class Profile extends React.Component {
       <View style={this.props.containerStyle}>
         <View>
           {image ? (
-            <Image source={{ uri: image }} style={styles.photo} />
+            <Image
+              source={{ uri: `data:image/jpeg;base64,${image}` }}
+              style={styles.photo}
+            />
           ) : (
             <View style={[styles.placeholder, styles.photo]} />
           )}
