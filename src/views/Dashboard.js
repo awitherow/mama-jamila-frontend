@@ -32,7 +32,7 @@ export default class Dashboard extends React.Component {
       case "about":
         return (
           <View style={styles.dashboardView}>
-            <Text>about</Text>
+            <Text>About</Text>
           </View>
         );
     }
@@ -67,7 +67,7 @@ export default class Dashboard extends React.Component {
           >
             <Image
               style={styles.icon}
-              source={require("../assets/icons/settings.png")}
+              source={require("../assets/icons/info.png")}
             />
           </TouchableOpacity>
         </View>
@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width,
-    padding: 24,
+    padding: 20,
     backgroundColor: "rgba(170, 158, 41, 0.5)"
   },
   iconButton: {
     marginHorizontal: 24
   },
   icon: {
-    height: 32,
-    width: 32
+    height: 28,
+    width: 28
   }
 });
