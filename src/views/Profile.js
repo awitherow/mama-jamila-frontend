@@ -77,7 +77,7 @@ export default class Profile extends React.Component {
 
 const { height, width } = Dimensions.get("window");
 
-const SELFIE_WIDTH = width * 0.8;
+const SELFIE_WIDTH = width * 0.7;
 
 const styles = StyleSheet.create({
   photo: {
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    bottom: SELFIE_WIDTH * 0.08,
-    right: SELFIE_WIDTH * 0.08,
+    bottom: SELFIE_WIDTH * 0.07,
+    right: SELFIE_WIDTH * 0.07,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
