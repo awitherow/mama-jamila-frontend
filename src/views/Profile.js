@@ -5,8 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
   StyleSheet,
-  Image,
-  TextInput
+  Image
 } from "react-native";
 
 import { ImagePicker } from "expo";
@@ -39,14 +38,14 @@ export default class Profile extends React.Component {
             <View style={[styles.placeholder, styles.photo]} />
           )}
           <TouchableOpacity style={styles.button} onPress={this.pickImage}>
-            <Text style={styles.buttonText}>SELFIE</Text>
+            <Image
+              style={styles.icon}
+              source={require("../assets/icons/add-white.png")}
+            />
           </TouchableOpacity>
         </View>
-        <View>
-          <TextInput
-            onChangeText={text => this.setState({ username: text })}
-            value={this.state.username}
-          />
+        <View style={styles.profileContainer}>
+          <Text style={styles.profileText}>Profile coming soon...</Text>
         </View>
       </View>
     );
@@ -63,21 +62,35 @@ const styles = StyleSheet.create({
     width: SELFIE_WIDTH,
     borderRadius: SELFIE_WIDTH / 2,
     borderWidth: 4,
-    borderColor: "rgba(170, 158, 41, 0.5)"
+    borderColor: "rgba(0,0,0,0.4)"
   },
   placeholder: {
     backgroundColor: "rgba(170, 158, 41, 0.5)"
   },
   button: {
-    marginTop: 8,
+    position: "absolute",
+    bottom: SELFIE_WIDTH * 0.08,
+    right: SELFIE_WIDTH * 0.08,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(170, 158, 41, 0.5)",
-    alignSelf: "flex-end"
+    backgroundColor: "rgba(0,0,0,0.8)",
+    borderColor: "white",
+    alignSelf: "flex-end",
+    borderRadius: 32
   },
-  buttonText: {
+  icon: {
+    height: 32,
+    width: 32
+  },
+  profileContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  profileText: {
+    fontSize: 32,
     fontFamily: "medium",
-    fontSize: 16
+    textAlign: "center"
   }
 });
