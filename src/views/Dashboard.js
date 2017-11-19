@@ -8,6 +8,8 @@ import {
   Dimensions
 } from "react-native";
 
+import Profile from "./Profile";
+
 export default class Dashboard extends React.Component {
   state = {
     dashboardView: "menu"
@@ -18,11 +20,7 @@ export default class Dashboard extends React.Component {
   renderDashboardView = () => {
     switch (this.state.dashboardView) {
       case "profile":
-        return (
-          <View style={styles.dashboardView}>
-            <Text>Profile</Text>
-          </View>
-        );
+        return <Profile containerStyle={styles.dashboardView} />;
       case "menu":
         return (
           <View style={styles.dashboardView}>
