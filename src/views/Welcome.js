@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   goButton: {
     width,
-    padding: 24,
+    padding: 20,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(170, 158, 41, 0.5)"

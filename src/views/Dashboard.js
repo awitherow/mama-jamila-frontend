@@ -8,6 +8,12 @@ import {
   Dimensions
 } from "react-native";
 
+// views
+import Profile from "./Profile";
+
+// components
+import Navbar from "../components/Navbar";
+
 export default class Dashboard extends React.Component {
   state = {
     dashboardView: "menu"
@@ -18,11 +24,7 @@ export default class Dashboard extends React.Component {
   renderDashboardView = () => {
     switch (this.state.dashboardView) {
       case "profile":
-        return (
-          <View style={styles.dashboardView}>
-            <Text>Profile</Text>
-          </View>
-        );
+        return <Profile containerStyle={styles.dashboardView} />;
       case "menu":
         return (
           <View style={styles.dashboardView}>
@@ -32,45 +34,19 @@ export default class Dashboard extends React.Component {
       case "about":
         return (
           <View style={styles.dashboardView}>
-            <Text>about</Text>
+            <Text>About</Text>
           </View>
         );
     }
   };
 
   render() {
+    const { dashboardView } = this.state;
+
     return (
       <View style={styles.container}>
         {this.renderDashboardView()}
-        <View style={styles.navBar}>
-          <TouchableOpacity
-            style={styles.iconButton}
-            onPress={() => this.setDashboardView("profile")}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../assets/icons/profile.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.iconButton}
-            onPress={() => this.setDashboardView("menu")}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../assets/icons/menu.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.iconButton}
-            onPress={() => this.setDashboardView("about")}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../assets/icons/settings.png")}
-            />
-          </TouchableOpacity>
-        </View>
+        <Navbar view={dashboardView} setView={this.setDashboardView} />
       </View>
     );
   }
@@ -88,21 +64,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 48,
     width,
-    backgroundColor: "rgba(242, 240, 221, 0.66)"
-  },
-  navBar: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    width,
-    padding: 24,
-    backgroundColor: "rgba(170, 158, 41, 0.5)"
-  },
-  iconButton: {
-    marginHorizontal: 24
-  },
-  icon: {
-    height: 32,
-    width: 32
+    backgroundColor: "rgba(242, 240, 221, 0.8)"
   }
 });
