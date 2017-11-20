@@ -1,19 +1,22 @@
 import React from "react";
 import {
+  ScrollView,
   View,
   Text,
   TouchableOpacity,
   Dimensions,
   StyleSheet,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  TextInput
 } from "react-native";
 
 import { ImagePicker } from "expo";
 
 export default class Profile extends React.Component {
   state = {
-    image: null
+    image: null,
+    username: ""
   };
 
   async componentDidMount() {
@@ -22,10 +25,27 @@ export default class Profile extends React.Component {
       if (image !== null) {
         this.setState({ image });
       }
+      const username = await AsyncStorage.getItem("@MJ:username");
+      if (username !== null) {
+        this.setState({ username });
+      }
     } catch (error) {
       console.warn("[WARN]: could not retrieve profile pic from async storage");
     }
   }
+
+  setUsername = async username => {
+    this.setState({
+      username
+    });
+
+    try {
+      await AsyncStorage.setItem("@MJ:username", username);
+      console.log("[INFO]: saved username to async storage");
+    } catch (error) {
+      console.warn("[WARN]: could not save username to async storage");
+    }
+  };
 
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -46,12 +66,24 @@ export default class Profile extends React.Component {
     }
   };
 
+  getProgramPoints = () => {
+    return 1000;
+  };
+
+  getFavoriteCount = () => {
+    return 3;
+  };
+
+  getFavorites = () => {
+    return [];
+  };
+
   render() {
     const { image, username } = this.state;
 
     return (
-      <View style={this.props.containerStyle}>
-        <View>
+      <ScrollView style={this.props.containerStyle}>
+        <View style={styles.imageContainer}>
           {image ? (
             <Image
               source={{ uri: `data:image/jpeg;base64,${image}` }}
@@ -67,10 +99,33 @@ export default class Profile extends React.Component {
             />
           </TouchableOpacity>
         </View>
+        <TextInput
+          style={styles.usernameInput}
+          onChangeText={username => this.setUsername(username)}
+          placeholder="My Username"
+          value={this.state.username}
+        />
         <View style={styles.profileContainer}>
-          <Text style={styles.profileText}>Profile coming soon...</Text>
+          <View style={styles.profileItem}>
+            <Text style={styles.profileItemTitle}>Loyalty Points</Text>
+            <Text style={styles.profileItemValue}>
+              {this.getProgramPoints()}
+            </Text>
+          </View>
+          <Text style={styles.miniInfo}>
+            More information on Loyalty Points coming soon!
+          </Text>
+          <View style={styles.profileItem}>
+            <Text style={styles.profileItemTitle}>Favorites</Text>
+            <Text style={styles.profileItemValue}>
+              {this.getFavoriteCount()}
+            </Text>
+          </View>
+          <Text style={styles.miniInfo}>
+            More information on Favorite Items coming soon!
+          </Text>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -80,6 +135,11 @@ const { height, width } = Dimensions.get("window");
 const SELFIE_WIDTH = width * 0.5;
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    alignItems: "center",
+    marginTop: 48,
+    marginBottom: 24
+  },
   photo: {
     height: SELFIE_WIDTH,
     width: SELFIE_WIDTH,
@@ -92,8 +152,8 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    bottom: SELFIE_WIDTH * 0.048,
-    right: SELFIE_WIDTH * 0.048,
+    bottom: SELFIE_WIDTH * 0.1,
+    right: SELFIE_WIDTH * 0.25,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
@@ -108,12 +168,37 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "center"
   },
-  profileText: {
-    fontSize: 32,
+  usernameInput: {
+    marginBottom: 24,
+    alignSelf: "stretch",
+    textAlign: "center",
+    marginVertical: 12,
+    fontFamily: "regular",
+    fontSize: 32
+  },
+  profileItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    alignSelf: "stretch",
+    marginVertical: 8
+  },
+  profileItemTitle: {
     fontFamily: "medium",
-    textAlign: "center"
+    fontSize: 24,
+    textAlign: "right"
+  },
+  profileItemValue: {
+    fontFamily: "regular",
+    fontSize: 20,
+    textAlign: "right",
+    marginLeft: "auto"
+  },
+  miniInfo: {
+    fontFamily: "light",
+    fontSize: 16
   }
 });

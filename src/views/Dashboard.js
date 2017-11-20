@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 48,
     width,
-    backgroundColor: "rgba(242, 240, 221, 0.66)",
-    alignItems: "center"
+    backgroundColor: "rgba(242, 240, 221, 0.8)"
   }
 });
