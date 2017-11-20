@@ -63,7 +63,7 @@ export default class Profile extends React.Component {
           <TouchableOpacity style={styles.button} onPress={this.pickImage}>
             <Image
               style={styles.icon}
-              source={require("../assets/icons/add-white.png")}
+              source={require("../assets/icons/add-alt.png")}
             />
           </TouchableOpacity>
         </View>
@@ -77,7 +77,7 @@ export default class Profile extends React.Component {
 
 const { height, width } = Dimensions.get("window");
 
-const SELFIE_WIDTH = width * 0.7;
+const SELFIE_WIDTH = width * 0.5;
 
 const styles = StyleSheet.create({
   photo: {
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    bottom: SELFIE_WIDTH * 0.07,
-    right: SELFIE_WIDTH * 0.07,
+    bottom: SELFIE_WIDTH * 0.048,
+    right: SELFIE_WIDTH * 0.048,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     borderRadius: 32
   },
   icon: {
-    height: 32,
-    width: 32
+    height: 24,
+    width: 24
   },
   profileContainer: {
     flex: 1,
