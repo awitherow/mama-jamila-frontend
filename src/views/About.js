@@ -5,9 +5,10 @@ import {
   Dimensions,
   View,
   Text,
-  Image
+  Image,
+  TouchableHighlight
 } from "react-native";
-import { MapView } from "expo";
+import { MapView, Linking } from "expo";
 
 const { height, width } = Dimensions.get("window");
 
@@ -15,13 +16,13 @@ const socialIcons = [
   {
     name: "Instagram",
     icon: require("../assets/icons/social/ig.png"),
-    link: ""
+    url: "https://www.instagram.com/mama_jamila_/"
   },
 
   {
     name: "Website",
     icon: require("../assets/icons/social/www.png"),
-    link: ""
+    url: "https://www.instagram.com/mama_jamila_/"
   }
 ];
 
@@ -50,7 +51,13 @@ export default function About({ containerStyles }) {
         </Text>
         <View style={styles.socialContainer}>
           {socialIcons.map(social => (
-            <Image key={social.name} source={social.icon} style={styles.icon} />
+            <TouchableHighlight onPress={() => Linking.openURL(social.url)}>
+              <Image
+                key={social.name}
+                source={social.icon}
+                style={styles.icon}
+              />
+            </TouchableHighlight>
           ))}
         </View>
       </View>
