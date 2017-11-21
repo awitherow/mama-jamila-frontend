@@ -1,8 +1,29 @@
 import React from "react";
-import { ScrollView, StyleSheet, Dimensions, View, Text } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+  View,
+  Text,
+  Image
+} from "react-native";
 import { MapView } from "expo";
 
 const { height, width } = Dimensions.get("window");
+
+const socialIcons = [
+  {
+    name: "Instagram",
+    icon: require("../assets/icons/social/ig.png"),
+    link: ""
+  },
+
+  {
+    name: "Website",
+    icon: require("../assets/icons/social/www.png"),
+    link: ""
+  }
+];
 
 export default function About({ containerStyles }) {
   return (
@@ -18,12 +39,20 @@ export default function About({ containerStyles }) {
       />
       <View style={styles.infoContainer}>
         <Text style={styles.titleText}>Mama Jamila Café</Text>
-        <Text style={styles.valueText}>
+        <Text style={styles.subTitleText}>
+          Homemade quality snacks and drinks, personalized just for you.
+        </Text>
+        <Text style={styles.bodyText}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
           aliquet mi in semper vulputate. In vitae neque velit. Vestibulum
           lectus ligula, laoreet sit amet tincidunt ut, pulvinar aliquet erat.
           Cras rhoncus ultrices finibus. Aliquam molestie tristique rutrum.
         </Text>
+        <View style={styles.socialContainer}>
+          {socialIcons.map(social => (
+            <Image key={social.name} source={social.icon} style={styles.icon} />
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -31,15 +60,32 @@ export default function About({ containerStyles }) {
 
 const styles = StyleSheet.create({
   infoContainer: {
-    flex: 1
+    paddingVertical: 24,
+    paddingHorizontal: 12,
+    backgroundColor: "rgba(242, 240, 221, 0.8)"
   },
   titleText: {
     fontFamily: "medium",
-    fontSize: 32,
-    paddingTop: 24
+    fontSize: 32
   },
-  valueText: {
+  subTitleText: {
+    fontFamily: "regular",
+    fontSize: 24,
+    marginBottom: 8
+  },
+  bodyText: {
     fontFamily: "light",
     fontSize: 16
+  },
+  socialContainer: {
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexDirection: "row",
+    marginVertical: 48,
+    marginHorizontal: 24
+  },
+  icon: {
+    width: 64,
+    height: 64
   }
 });
