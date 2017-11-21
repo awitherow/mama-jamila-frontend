@@ -10,6 +10,7 @@ import {
 
 // views
 import Profile from "./Profile";
+import About from "./About";
 
 // components
 import Navbar from "../components/Navbar";
@@ -32,11 +33,7 @@ export default class Dashboard extends React.Component {
           </View>
         );
       case "about":
-        return (
-          <View style={styles.dashboardView}>
-            <Text>About</Text>
-          </View>
-        );
+        return <About containerStyle={styles.dashboardView} />;
     }
   };
 
