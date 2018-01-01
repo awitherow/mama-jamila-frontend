@@ -30,13 +30,14 @@ export default class App extends React.Component {
   }
 
   renderContent = () => {
+    const { view } = this.state;
     const sharedProps = {
       setView: this.setView
     };
 
     const WELCOME_SCREEN = <Welcome {...sharedProps} />;
 
-    switch (this.state.view) {
+    switch (view) {
       case "welcome":
         return WELCOME_SCREEN;
       case "dashboard":
@@ -49,12 +50,13 @@ export default class App extends React.Component {
   setView = view => this.setState({ view });
 
   render() {
+    const { loading } = this.state;
     return (
       <Image
         style={styles.backgroundImage}
-        source={require("./src/assets/intro-bg.jpg")}
+        source={require("./src/assets/bg.jpg")}
       >
-        {this.state.loading ? null : this.renderContent()}
+        {loading ? null : this.renderContent()}
       </Image>
     );
   }

@@ -10,6 +10,7 @@ import {
 
 // views
 import Profile from "./Profile";
+import About from "./About";
 
 // components
 import Navbar from "../components/Navbar";
@@ -24,7 +25,7 @@ export default class Dashboard extends React.Component {
   renderDashboardView = () => {
     switch (this.state.dashboardView) {
       case "profile":
-        return <Profile containerStyle={styles.dashboardView} />;
+        return <Profile />;
       case "menu":
         return (
           <View style={styles.dashboardView}>
@@ -32,11 +33,7 @@ export default class Dashboard extends React.Component {
           </View>
         );
       case "about":
-        return (
-          <View style={styles.dashboardView}>
-            <Text>About</Text>
-          </View>
-        );
+        return <About />;
     }
   };
 
@@ -57,8 +54,7 @@ const { height, width } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center"
+    justifyContent: "flex-end"
   },
   dashboardView: {
     flex: 1,
