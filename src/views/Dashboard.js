@@ -25,7 +25,7 @@ export default class Dashboard extends React.Component {
   renderDashboardView = () => {
     switch (this.state.dashboardView) {
       case "profile":
-        return <Profile containerStyle={styles.dashboardView} />;
+        return <Profile />;
       case "menu":
         return (
           <View style={styles.dashboardView}>
@@ -33,7 +33,7 @@ export default class Dashboard extends React.Component {
           </View>
         );
       case "about":
-        return <About containerStyle={styles.dashboardView} />;
+        return <About />;
     }
   };
 

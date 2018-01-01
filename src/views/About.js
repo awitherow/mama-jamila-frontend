@@ -26,9 +26,9 @@ const socialIcons = [
   }
 ];
 
-export default function About({ containerStyles }) {
+export default function About() {
   return (
-    <ScrollView style={containerStyles}>
+    <ScrollView>
       <MapView
         style={{ width, height: height * 0.6 }}
         initialRegion={{
@@ -51,12 +51,11 @@ export default function About({ containerStyles }) {
         </Text>
         <View style={styles.socialContainer}>
           {socialIcons.map(social => (
-            <TouchableHighlight onPress={() => Linking.openURL(social.url)}>
-              <Image
-                key={social.name}
-                source={social.icon}
-                style={styles.icon}
-              />
+            <TouchableHighlight
+              key={social.name}
+              onPress={() => Linking.openURL(social.url)}
+            >
+              <Image source={social.icon} style={styles.icon} />
             </TouchableHighlight>
           ))}
         </View>
@@ -68,7 +67,7 @@ export default function About({ containerStyles }) {
 const styles = StyleSheet.create({
   infoContainer: {
     paddingVertical: 24,
-    paddingHorizontal: 12,
+    paddingHorizontal: 48,
     backgroundColor: "rgba(242, 240, 221, 0.8)"
   },
   titleText: {

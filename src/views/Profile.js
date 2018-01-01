@@ -82,7 +82,7 @@ export default class Profile extends React.Component {
     const { image, username } = this.state;
 
     return (
-      <ScrollView style={this.props.containerStyle}>
+      <ScrollView style={styles.container}>
         <View style={styles.imageContainer}>
           {image ? (
             <Image
@@ -135,6 +135,9 @@ const { height, width } = Dimensions.get("window");
 const SELFIE_WIDTH = width * 0.5;
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 32
+  },
   imageContainer: {
     alignItems: "center",
     marginTop: 48,
@@ -169,7 +172,9 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     alignItems: "flex-end",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "rgba(242, 240, 221, 0.8)",
+    padding: 16
   },
   usernameInput: {
     marginBottom: 24,
