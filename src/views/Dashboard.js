@@ -11,6 +11,7 @@ import {
 // views
 import Profile from "./Profile";
 import About from "./About";
+import Menu from "./Menu";
 
 // components
 import Navbar from "../components/Navbar";
@@ -27,11 +28,7 @@ export default class Dashboard extends React.Component {
       case "profile":
         return <Profile />;
       case "menu":
-        return (
-          <View style={styles.dashboardView}>
-            <Text>Menu</Text>
-          </View>
-        );
+        return <Menu />;
       case "about":
         return <About />;
     }
