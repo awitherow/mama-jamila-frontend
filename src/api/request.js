@@ -1,10 +1,11 @@
 import axios from "axios";
+import { HID } from "./config";
 
 const request = axios.create({
-  baseUrl: "https://foodics.com/api/v2/",
+  baseUrl: "https://dev-dash.foodics.com/api/v2/",
   headers: {
     // TODO: lock this file from external viewing.
-    "X-business": "BUSINESS_HID_HERE",
+    "X-business": HID,
     Accept: "application/json",
     "Content-Type": "application/json"
   }

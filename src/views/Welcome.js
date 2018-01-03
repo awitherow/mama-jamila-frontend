@@ -7,7 +7,7 @@ import {
   Dimensions
 } from "react-native";
 
-export default function Welcome({ setMainState }) {
+export default function Welcome({ setAppState }) {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -19,7 +19,7 @@ export default function Welcome({ setMainState }) {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => setMainState("view", "dashboard")}
+        onPress={() => setAppState("view", "dashboard")}
         style={styles.goButton}
       >
         <Text style={styles.buttonText}>ENTER THE SHOP</Text>

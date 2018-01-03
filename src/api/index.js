@@ -1,7 +1,8 @@
 import request from "./request";
+import { secret } from "./config";
 
 function handleError(e) {
-  const status = e.response.status;
+  const { status } = e;
 
   if (status === 400 || status === 401 || status === 404) {
     return "Request invalid, please force quit the app and try again.";
@@ -20,9 +21,23 @@ export function getFoodicsAuthToken() {
   request
     .get("token", {
       data: {
-        secret: "INSERT_SECRET_HERE"
+        secret
       }
     })
-    .then(res => res.data)
+    .then(res => res.token)
+    .catch(e => handleError(e));
+}
+
+export function getFoodicsProducts(token) {
+  request
+    .get("token", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      data: {
+        secret
+      }
+    })
+    .then(res => res.products)
     .catch(e => handleError(e));
 }
